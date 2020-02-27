@@ -14,11 +14,11 @@ namespace ExceptionHandlingTest
         [Test]
         public void PositiveTestConvertToInt()
         {
-            string num = "15";
+            string num = "1514";
 
             int result = IntConverter.ConvertToInt(num);
 
-            Assert.AreEqual(15, result);
+            Assert.AreEqual(1514, result);
         }
 
         [Test]
@@ -26,9 +26,9 @@ namespace ExceptionHandlingTest
         {
             Assert.Multiple(() => 
             {
-                Assert.Throws<FormatException>(FormatExceptionStringWithAlphabitSymbol);
-                Assert.Throws<FormatException>(FormatExceptionStringWithEmptyString);
-                Assert.Throws<FormatException>(FormatExceptionStringMixed);
+                Assert.Throws<FormatException>(FormatExceptionStringWithAlphabitSymbol, "Input string must not contained any symbols except numbers");
+                Assert.Throws<FormatException>(FormatExceptionStringWithEmptyString, "Input string must not contained any symbols except numbers");
+                Assert.Throws<FormatException>(FormatExceptionStringMixed, "Input string must not contained any symbols except numbers");
             });
         }
 

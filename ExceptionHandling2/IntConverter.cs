@@ -10,9 +10,9 @@ namespace ExceptionHandling2
             {
                 return Convert.ToInt32(sourceString);
             }
-            catch (FormatException)
+            catch (FormatException ex)
             {
-                throw;
+                throw new FormatException("Input string must not contained any symbols except numbers", ex);
             }
         }
     }
