@@ -4,16 +4,31 @@ namespace ExceptionHandling2
 {
     public static class IntConverter
     {
-        public static int ConvertToInt(string sourceString)
+        public static int ConvertStringToInt(string sourceString)
         {
-            try
+            if (sourceString.Length == 0) throw new FormatException("Exception: String length cannot be 0!");
+            bool isNegative = false;
+            int begin = 0;
+            switch (sourceString[0])
             {
-                return Convert.ToInt32(sourceString);
+                case '-':
+                    if (sourceString.Length == 1) throw new FormatException("Exception: String cannot contain only one arithmetic sign!");
+                    begin = 1;
+                    isNegative = true;
+                    break;
+                case '+':
+                    if (sourceString.Length == 1) throw new FormatException("Exception: String cannot contain only one arithmetic sign!");
+                    begin = 1;
+                    break;
             }
-            catch (FormatException ex)
+            int result = 0;
+            for (int i = begin; i < sourceString.Length; i++)
             {
-                throw new FormatException("Input string must not contained any symbols except numbers", ex);
+                char c = sourceString[i];
+                if (c < '0' || c > '9') throw new FormatException("Exception: String must contain only numbers!");
+                result = result * 10 + (c - '0');
             }
+            return (isNegative) ? -result : result;
         }
     }
 }
